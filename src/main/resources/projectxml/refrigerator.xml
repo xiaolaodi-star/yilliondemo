@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.little.interfaces.RefrigeratorOperating">
+<!--    插入冰箱相关的信息-->
+    <insert id="addRefrigerator" parameterType="com.little.entity.Refrigerator">
+        insert into refrigerator (RefrigeratorName,Length,Height,Width,Status) value (#{RefrigeratorName},#{Length},#{Height},#{Width},#{Status})
+    </insert>
+    <!--    查看冰箱的相关信息-->
+    <select id="checkRefrigerator" resultType="com.little.entity.Refrigerator">
+        select * from refrigerator
+    </select>
+    <select id="singlerefrigerator" resultType="com.little.entity.Refrigerator">
+        select * from refrigerator where RefrigeratorName=#{name}
+    </select>
+    <select id="statusrefrigerator" resultType="com.little.entity.Refrigerator">
+        select * from refrigerator where Status=#{status}
+    </select>
+    <!--    修改冰箱相关信息-->
+    <update id="updateRefrigerator">
+        update refrigerator set Length=#{Length},Height=#{Height},Width=#{Width},Status=#{Status} where RefrigeratorName=#{RefrigeratorName}
+    </update>
+    <!--    删除冰箱-->
+    <delete id="deleteRefrigerator">
+        delete from refrigerator where(RefrigeratorName =#{name})
+    </delete>
+
+</mapper>

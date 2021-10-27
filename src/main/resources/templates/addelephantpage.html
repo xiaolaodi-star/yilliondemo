@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加大象</title>
+    <link th:href="@{static/css/bootstrap.min.css}" rel="stylesheet" />
+</head>
+<body>
+    <div style="margin: auto">
+        <form method="post" th:action="@{addelephant}">
+            大象姓名：<input name="elephantname" placeholder="大象的姓名" oninput = "value=value.replace(/[^\d]/g,'')">
+            大象长度：<input name="elephantlength" placeholder="大象的长度" oninput = "value=value.replace(/[^\d]/g,'')">
+            大象高度：<input name="elephantheight" placeholder="大象的高度" oninput = "value=value.replace(/[^\d]/g,'')">
+            大象宽度：<input name="elephantwidth" placeholder="大象的宽度" oninput = "value=value.replace(/[^\d]/g,'')">
+            <button type="submit">添加</button>
+            <hr>
+            <a th:href="demopage">返回首页</a>
+        </form>
+    </div>
+    <div id="elephantdata">
+        <h2>查看数据库中大象的信息</h2>
+        <button type="submit" onclick="showtable()">刷新</button>
+        <div class="table">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>大象姓名</th>
+                    <th>大象长度</th>
+                    <th>大象高度</th>
+                    <th>大象宽度</th>
+                </tr>
+                </thead>
+                <tbody id="showplace">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    function showtable(){
+        $.ajax({
+            type:"post",
+            url:"checkelephant",
+            dataType:"json",
+            data:{},
+            async:false,
+            contentType:"application/json",
+            success:function (data)
+        {
+            var str = "";
+            for (var i=0;i<data.length;i++){
+                var temp=data[i];
+                temp=JSON.stringify(temp);
+                temp=String(temp);
+                temp = eval('(' + temp + ')');
+                str=str+"<tr>" +
+                    "<td>"+(i+1)+"</td>" +
+                    "<td>"+temp.name+"</td>" +
+                    "<td>"+temp.length+"</td>"+
+                    "<td>"+temp.height+"</td>"+
+                    "<td>"+temp.width+"</td>" +
+                    "</tr>"
+            }
+            if(!str){
+                str=str+"<tr>" +
+                    "<td>"+(i+1)+"</td>" +
+                    "<td>"+null+"</td>" +
+                    "<td>"+null+"</td>"+
+                    "<td>"+null+"</td>"+
+                    "<td>"+null+"</td>" +
+                    "</tr>"
+            }
+            document.getElementById("showplace").innerHTML= str;
+        }
+        });
+    }
+</script>
+<script th:src="@{static/js/jquery-3.6.0.min.js}"></script>
+</html>

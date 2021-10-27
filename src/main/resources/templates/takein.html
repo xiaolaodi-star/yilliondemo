@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>大象塞冰箱</title>
+</head>
+<body onload="getlist()">
+    <div id="takeincontent">
+        <h2>数据库中查询得到的大象信息如下</h2>
+        <div class="table">
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>大象姓名</th>
+                    <th>大象长度</th>
+                    <th>大象高度</th>
+                    <th>大象宽度</th>
+                    <th>大象状态</th>
+                </tr>
+                </thead>
+                <tbody id="showplace1">
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <table id="refrigeratorlist">
+            <thead>
+            <tr>
+                <td>#</td>
+                <td>冰箱姓名</td>
+                <td>冰箱长度</td>
+                <td>冰箱宽度</td>
+                <td>冰箱高度</td>
+                <td>冰箱状态</td>
+            </tr>
+            </thead>
+            <tbody id="showplace2"></tbody>
+        </table>
+    </div>
+    <div>
+<!--        <form method="post" th:action="@{takeinpage}">-->
+            大象的姓名：<input id="elephantname" placeholder="请按照列表输入大象的姓名">
+            冰箱的姓名：<input id="refrigeratorname" placeholder="请按照列表输入冰箱的姓名">
+            <button type="submit" onclick="dealresult()">提交</button>
+            <button type="submit" onclick="takeout()">拿出大象</button>
+<!--        </form>-->
+    </div>
+<div>
+    <a th:href="@{demopage}"><h2>返回首页</h2></a>
+</div>
+</body>
+<script th:src="@{static/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{static/js/takein.js}"></script>
+<!--onclick="dealresult()"-->
+</html>
